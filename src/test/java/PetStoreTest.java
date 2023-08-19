@@ -40,8 +40,8 @@ public class PetStoreTest {
   }
 
   @Test
-  @DisplayName("Получение питомца с минимальным набором атрибутов")
-  public void getPetMinAttributeTest() {
+  @DisplayName("Получение питомца с минимальным набором параметров")
+  public void getPetMinParameterTest() {
     PetDTO petDTO = PetDTO.builder()
         .id(435L)
         .name("Bobik")
