@@ -16,7 +16,6 @@ public class PetApi {
   private static final String BASE_URI = System.getProperty("base.uri");
   private static final String ADD_PET_PATH = "/pet";
   private static final String DELETE_PET_PATH = "/pet/{petId}";
-
   private static final String GET_PET_PATH = "/pet/{petId}";
 
   private RequestSpecification requestSpecification;
@@ -53,7 +52,8 @@ public class PetApi {
         .get(GET_PET_PATH, id)
         .then()
         .spec(responseSpecification)
-        .log().all();
+            .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/Pet.json"))
+            .log().all();
   }
 
   public ValidatableResponse getNotExistPet(long id) {

@@ -5,19 +5,20 @@ import dto.Category;
 import dto.PetDTO;
 import dto.PetResponseDTO;
 import dto.Tag;
-import io.restassured.module.jsv.JsonSchemaValidator;
-import io.restassured.response.ValidatableResponse;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import services.PetApi;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class PetStoreTest {
 
-  PetApi petApi = new PetApi();
+ protected PetApi petApi = new PetApi();
+
+  long petId;
 
   @Test
   @DisplayName("Создание и получение питомца с минимальным количеством параметров  ")
@@ -30,15 +31,22 @@ public class PetStoreTest {
         .tags(new ArrayList<>())
         .build();
     PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
+    PetResponseDTO petGetResponse = petApi.getPet(petDTO.getId()).extract().as(PetResponseDTO.class);
+    petId = actualPet.getId();
     assertAll("",
         () -> assertEquals(petDTO.getId(), actualPet.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), actualPet.getName(), "Incorrect name"),
         () -> assertEquals(petDTO.getStatus(), actualPet.getStatus(), "Incorrect status")
     );
+    assertAll("",
+        () -> assertEquals(petDTO.getId(), petGetResponse.getId(), "Incorrect id"),
+        () -> assertEquals(petDTO.getName(), petGetResponse.getName(), "Incorrect name"),
+        () -> assertEquals(petDTO.getStatus(), petGetResponse.getStatus(), "Incorrect status")
+    );
   }
 
   @Test
-  @DisplayName("Получение питомца с минимальным набором параметров")
+  @DisplayName("Создание питомца с минимальным набором параметров")
   public void getPetMinParameterTest() {
     PetDTO petDTO = PetDTO.builder()
         .id(435L)
@@ -49,6 +57,7 @@ public class PetStoreTest {
         .build();
     PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
     PetResponseDTO petGetResponse = petApi.getPet(petDTO.getId()).extract().as(PetResponseDTO.class);
+    petId = actualPet.getId();
     assertAll("",
         () -> assertEquals(petDTO.getId(), petGetResponse.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), petGetResponse.getName(), "Incorrect name"),
@@ -79,6 +88,8 @@ public class PetStoreTest {
         .photoUrls(photoUrls)
         .build();
     PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
+    PetResponseDTO petGetResponse = petApi.getPet(petDTO.getId()).extract().as(PetResponseDTO.class);
+    petId = actualPet.getId();
     assertAll("",
         () -> assertEquals(petDTO.getId(), actualPet.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), actualPet.getName(), "Incorrect name"),
@@ -87,6 +98,21 @@ public class PetStoreTest {
         () -> assertEquals(petDTO.getTags(), actualPet.getTags(), "Incorrect tags"),
         () -> assertEquals(petDTO.getPhotoUrls(), actualPet.getPhotoUrls(), "Incorrect status")
     );
+    assertAll("",
+        () -> assertEquals(petDTO.getId(), petGetResponse.getId(), "Incorrect id"),
+        () -> assertEquals(petDTO.getName(), petGetResponse.getName(), "Incorrect name"),
+        () -> assertEquals(petDTO.getStatus(), petGetResponse.getStatus(), "Incorrect status"),
+        () -> assertEquals(petDTO.getCategory(), petGetResponse.getCategory(), "Incorrect category"),
+        () -> assertEquals(petDTO.getTags(), petGetResponse.getTags(), "Incorrect tags"),
+        () -> assertEquals(petDTO.getPhotoUrls(), petGetResponse.getPhotoUrls(), "Incorrect status")
+    );
+
+
+  }
+
+  @AfterEach
+  public void cleaningPet() {
+    petApi.deletePet(petId);
   }
 }
 

@@ -7,7 +7,7 @@ import services.PetApi;
 
 public class PetStoreNegativeTest {
 
-  PetApi petApi = new PetApi();
+  protected PetApi petApi = new PetApi();
 
   @Test
   @DisplayName("Получение питомца с несуществующим id")
