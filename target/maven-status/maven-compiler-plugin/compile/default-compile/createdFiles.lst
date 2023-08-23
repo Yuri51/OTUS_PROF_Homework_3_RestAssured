@@ -1,0 +1,9 @@
+dto\PetDTO$PetDTOBuilder.class
+dto\Tag$TagBuilder.class
+services\PetApi.class
+dto\Category$CategoryBuilder.class
+dto\PetDTO.class
+dto\PetResponseDTO$PetResponseDTOBuilder.class
+dto\Category.class
+dto\PetResponseDTO.class
+dto\Tag.class

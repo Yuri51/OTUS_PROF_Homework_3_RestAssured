@@ -5,6 +5,7 @@ import static io.restassured.RestAssured.given;
 import dto.PetDTO;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -12,7 +13,7 @@ import org.hamcrest.Matchers;
 
 public class PetApi {
 
-  private static final String BASE_URI = "https://petstore.swagger.io/v2";
+  private static final String BASE_URI = System.getProperty("base.uri");
   private static final String ADD_PET_PATH = "/pet";
   private static final String DELETE_PET_PATH = "/pet/{petId}";
 
@@ -42,6 +43,7 @@ public class PetApi {
         .post(ADD_PET_PATH)
         .then()
         .spec(responseSpecification)
+        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/Pet.json"))
         .log().all();
   }
 

@@ -20,7 +20,7 @@ public class PetStoreTest {
   PetApi petApi = new PetApi();
 
   @Test
-  @DisplayName("Создание питомца с минимальным количеством параметров")
+  @DisplayName("Создание и получение питомца с минимальным количеством параметров  ")
   public void addPetMinTest() {
     PetDTO petDTO = PetDTO.builder()
         .id(123L)
@@ -29,9 +29,7 @@ public class PetStoreTest {
         .photoUrls(new ArrayList<>())
         .tags(new ArrayList<>())
         .build();
-    ValidatableResponse response = petApi.addNewPet(petDTO)
-        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/Pet.json"));
-    PetResponseDTO actualPet = response.extract().body().as(PetResponseDTO.class);
+    PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
     assertAll("",
         () -> assertEquals(petDTO.getId(), actualPet.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), actualPet.getName(), "Incorrect name"),
@@ -49,9 +47,7 @@ public class PetStoreTest {
         .photoUrls(new ArrayList<>())
         .tags(new ArrayList<>())
         .build();
-    ValidatableResponse response = petApi.addNewPet(petDTO)
-        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/Pet.json"));
-    PetResponseDTO actualPet = response.extract().body().as(PetResponseDTO.class);
+    PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
     PetResponseDTO petGetResponse = petApi.getPet(petDTO.getId()).extract().as(PetResponseDTO.class);
     assertAll("",
         () -> assertEquals(petDTO.getId(), petGetResponse.getId(), "Incorrect id"),
@@ -82,9 +78,7 @@ public class PetStoreTest {
         .status("available")
         .photoUrls(photoUrls)
         .build();
-    ValidatableResponse response = petApi.addNewPet(petDTO)
-        .body(JsonSchemaValidator.matchesJsonSchemaInClasspath("schema/Pet.json"));
-    PetResponseDTO actualPet = response.extract().body().as(PetResponseDTO.class);
+    PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
     assertAll("",
         () -> assertEquals(petDTO.getId(), actualPet.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), actualPet.getName(), "Incorrect name"),
