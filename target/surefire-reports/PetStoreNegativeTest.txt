@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: PetStoreNegativeTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.02 s - in PetStoreNegativeTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.101 s - in PetStoreNegativeTest

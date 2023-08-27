@@ -15,9 +15,7 @@ import java.util.List;
 
 
 public class PetStoreTest {
-
- protected PetApi petApi = new PetApi();
-
+  private PetApi petApi = new PetApi();
   long petId;
 
   @Test
@@ -106,8 +104,6 @@ public class PetStoreTest {
         () -> assertEquals(petDTO.getTags(), petGetResponse.getTags(), "Incorrect tags"),
         () -> assertEquals(petDTO.getPhotoUrls(), petGetResponse.getPhotoUrls(), "Incorrect status")
     );
-
-
   }
 
   @AfterEach
