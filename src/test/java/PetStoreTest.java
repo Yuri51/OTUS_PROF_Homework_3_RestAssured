@@ -16,7 +16,6 @@ import java.util.List;
 
 public class PetStoreTest {
   private PetApi petApi = new PetApi();
-  long petId;
 
   @Test
   @DisplayName("Создание и получение питомца с минимальным количеством параметров  ")
@@ -30,32 +29,12 @@ public class PetStoreTest {
         .build();
     PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
     PetResponseDTO petGetResponse = petApi.getPet(petDTO.getId()).extract().as(PetResponseDTO.class);
-    petId = actualPet.getId();
+    petApi.deletePet(actualPet.getId());
     assertAll("",
         () -> assertEquals(petDTO.getId(), actualPet.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), actualPet.getName(), "Incorrect name"),
         () -> assertEquals(petDTO.getStatus(), actualPet.getStatus(), "Incorrect status")
     );
-    assertAll("",
-        () -> assertEquals(petDTO.getId(), petGetResponse.getId(), "Incorrect id"),
-        () -> assertEquals(petDTO.getName(), petGetResponse.getName(), "Incorrect name"),
-        () -> assertEquals(petDTO.getStatus(), petGetResponse.getStatus(), "Incorrect status")
-    );
-  }
-
-  @Test
-  @DisplayName("Создание питомца с минимальным набором параметров")
-  public void getPetMinParameterTest() {
-    PetDTO petDTO = PetDTO.builder()
-        .id(435L)
-        .name("Bobik")
-        .status("available")
-        .photoUrls(new ArrayList<>())
-        .tags(new ArrayList<>())
-        .build();
-    PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
-    PetResponseDTO petGetResponse = petApi.getPet(petDTO.getId()).extract().as(PetResponseDTO.class);
-    petId = actualPet.getId();
     assertAll("",
         () -> assertEquals(petDTO.getId(), petGetResponse.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), petGetResponse.getName(), "Incorrect name"),
@@ -87,7 +66,7 @@ public class PetStoreTest {
         .build();
     PetResponseDTO actualPet = petApi.addNewPet(petDTO).extract().body().as(PetResponseDTO.class);
     PetResponseDTO petGetResponse = petApi.getPet(petDTO.getId()).extract().as(PetResponseDTO.class);
-    petId = actualPet.getId();
+    petApi.deletePet(actualPet.getId());
     assertAll("",
         () -> assertEquals(petDTO.getId(), actualPet.getId(), "Incorrect id"),
         () -> assertEquals(petDTO.getName(), actualPet.getName(), "Incorrect name"),
@@ -104,11 +83,6 @@ public class PetStoreTest {
         () -> assertEquals(petDTO.getTags(), petGetResponse.getTags(), "Incorrect tags"),
         () -> assertEquals(petDTO.getPhotoUrls(), petGetResponse.getPhotoUrls(), "Incorrect status")
     );
-  }
-
-  @AfterEach
-  public void cleaningPet() {
-    petApi.deletePet(petId);
   }
 }
 
