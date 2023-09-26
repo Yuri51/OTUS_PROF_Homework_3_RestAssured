@@ -64,7 +64,7 @@ public class PetApi {
         .log().all();
   }
 
-  public ValidatableResponse deletePet(long id) {
+  public ValidatableResponse deletePet(int id) {
     return given(requestSpecification)
         .when()
         .delete(DELETE_PET_PATH, id)

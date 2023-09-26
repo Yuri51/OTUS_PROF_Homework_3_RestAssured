@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 public class PetDTO {
   private Category category;
-  private Long id;
+  private Integer id;
   private String name;
   private List<String> photoUrls;
   private String status;

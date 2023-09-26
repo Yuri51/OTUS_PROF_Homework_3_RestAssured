@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.19">
-<file name="C:\Users\SPB\Documents\GitHub\OTUS_PROF_Homework_3_RestAssured\src\main\java\dto\Category.java">
-</file>
-<file name="C:\Users\SPB\Documents\GitHub\OTUS_PROF_Homework_3_RestAssured\src\main\java\dto\PetDTO.java">
-</file>
-<file name="C:\Users\SPB\Documents\GitHub\OTUS_PROF_Homework_3_RestAssured\src\main\java\dto\PetResponseDTO.java">
-</file>
-<file name="C:\Users\SPB\Documents\GitHub\OTUS_PROF_Homework_3_RestAssured\src\main\java\dto\Tag.java">
-</file>
-<file name="C:\Users\SPB\Documents\GitHub\OTUS_PROF_Homework_3_RestAssured\src\main\java\services\PetApi.java">
-</file>
-<file name="C:\Users\SPB\Documents\GitHub\OTUS_PROF_Homework_3_RestAssured\src\test\java\PetStoreNegativeTest.java">
-</file>
 <file name="C:\Users\SPB\Documents\GitHub\OTUS_PROF_Homework_3_RestAssured\src\test\java\PetStoreTest.java">
 </file>
 </checkstyle>

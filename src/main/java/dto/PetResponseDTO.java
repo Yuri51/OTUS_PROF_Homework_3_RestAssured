@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PetResponseDTO {
   private Category category;
-  private Long id;
+  private Integer id;
   private String name;
   private List<String> photoUrls;
   private String status;
