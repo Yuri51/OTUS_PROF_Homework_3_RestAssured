@@ -12,7 +12,7 @@ timeout(180) {
             }
             stage('Run tests') {
                 tests_exit_code = sh(
-                    script: "gradle test -DbaseUrl=$BASE_URL",
+                    script: "mvn test -DbaseUrl=$BASE_URL",
                 )
                 if (tests_exit_code != 0) {
                     currentBuild.result = 'UNSTABLE'
