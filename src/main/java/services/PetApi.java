@@ -3,6 +3,7 @@ package services;
 import static io.restassured.RestAssured.given;
 
 import dto.PetDTO;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -35,6 +36,7 @@ public class PetApi {
         .log().all();
   }
 
+  @Step("Добавление нового питомца")
   public ValidatableResponse addNewPet(PetDTO petDTO) {
     return given(requestSpecification)
         .body(petDTO)
@@ -46,6 +48,7 @@ public class PetApi {
         .log().all();
   }
 
+  @Step("Получение питомца по id")
   public ValidatableResponse getPet(long id) {
     return given(requestSpecification)
         .when()
@@ -64,6 +67,7 @@ public class PetApi {
         .log().all();
   }
 
+  @Step("Удаление питомца по id")
   public ValidatableResponse deletePet(int id) {
     return given(requestSpecification)
         .when()
