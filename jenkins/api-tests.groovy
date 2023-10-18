@@ -12,7 +12,9 @@ timeout(180) {
             }
             stage('Run tests') {
                 tests_exit_code = sh(
-                    script: "mvn test -DbaseUrl=$BASE_URL",
+                        script: "mvn test -DbaseUrl=$BASE_URL",
+                        returnStatus: true,
+
                 )
                 if (tests_exit_code != 0) {
                     currentBuild.result = 'UNSTABLE'
@@ -20,11 +22,11 @@ timeout(180) {
             }
             stage('Publish artifacts') {
                 allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
+                        includeProperties: false,
+                        jdk              : '',
+                        properties       : [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results          : [[path: 'allure-results']]
                 ])
             }
         }
