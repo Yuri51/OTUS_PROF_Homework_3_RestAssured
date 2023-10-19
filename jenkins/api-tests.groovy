@@ -13,7 +13,7 @@ timeout(180) {
             stage('Run tests') {
                 tests_exit_code = sh(
                         script: "mvn test -DbaseUrl=$BASE_URL",
-                        returnStatus: true,
+//                        returnStatus: true,
 
                 )
                 if (tests_exit_code != 0) {
